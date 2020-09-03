@@ -59,4 +59,16 @@ router.post('/update', (req, res) => {
   })
 })
 
+// DELETE
+router.delete('/delete', (req, res) => {
+  Project.findByIdAndDelete(req.body.id, err => {
+    if (err) {
+      console.log(err)
+      err.message = 'Failed to delete project'
+      res.send(err)
+    }
+    res.send({ message: 'Project deleted successfully' })
+  })
+})
+
 module.exports = router
