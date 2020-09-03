@@ -27,8 +27,12 @@ router.get('/', (req, res) => {
   User.findOne({ username: req.body.username }, (err, user) => {
     if (err) {
       console.log(err)
-      err.message = 'Cannot find that user'
       res.send(err)
+    }
+    if (user == null) {
+      const newErr = new Error()
+      newErr.message = 'Cannot find user with that name'
+      res.send(newErr)
     }
     res.send(user)
   })
