@@ -1,14 +1,36 @@
 const router = require('express').Router({ mergeParams: true })
 const User = require('../models/User')
 
-router.post('/', (req, res) => {
-  User.create(req.body, (err, user) => {
+// CREATE
+router.post('/', async (req, res) => {
+  // Check that username isn't already in use
+  const userExists = await User.find({ username: req.body.username })
+  if (userExists.length > 0) {
+    const newErr = new Error()
+    newErr.message = 'User with the name already exists'
+    res.send(newErr)
+  } else {
+    // Create a new user and respond with user
+    User.create(req.body, (err, user) => {
+      if (err) {
+        console.log(err)
+        err.message = 'Failed to create new user'
+        res.send(err)
+      }
+      res.send(user)
+    })
+  }
+})
+
+// SHOW
+router.get('/', (req, res) => {
+  User.find({ username: req.body.username }, (err, user) => {
     if (err) {
       console.log(err)
-      err.message = 'Failed to create new user'
-      res.send({ err })
+      err.message = 'Cannot find that user'
+      res.send(err)
     }
-    res.send({ user })
+    res.send(user)
   })
 })
 
