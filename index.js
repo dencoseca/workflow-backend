@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/user', userRoutes)
-app.use('/:username', projectRoutes)
+app.use('/project', projectRoutes)
 app.use('/:username/:projectName/tasks', taskRoutes)
 
 // =====================
