@@ -3,15 +3,16 @@
 // =====================
 
 // APP
-const express = require('express'),
-  app = express(),
-  mongoose = require('mongoose'),
-  dotenv = require('dotenv').config()
+const express = require('express')
+const app = express()
+const mongoose = require('mongoose')
+const dotenv = require('dotenv').config()
+const bodyParser = require('body-parser')
 
 // IMPORT ROUTES
-const userRoutes = require('./routes/user'),
-  projectRoutes = require('./routes/project'),
-  taskRoutes = require('./routes/task')
+const userRoutes = require('./routes/user')
+const projectRoutes = require('./routes/project')
+const taskRoutes = require('./routes/task')
 
 // =====================
 // APP CONFIG
@@ -26,6 +27,9 @@ mongoose.connect(`mongodb+srv://${loginDetails}@projectdeploycluster-zaz5i.mongo
   useUnifiedTopology: true,
   useFindAndModify: false
 })
+
+// MIDDLEWARE CONFIG
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // =====================
 // ROUTER CONFIG
