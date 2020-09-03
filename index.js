@@ -8,6 +8,11 @@ const express = require('express'),
   mongoose = require('mongoose'),
   dotenv = require('dotenv').config()
 
+// IMPORT ROUTES
+const userRoutes = require('./routes/user'),
+  projectRoutes = require('./routes/project'),
+  taskRoutes = require('./routes/task')
+
 // =====================
 // APP CONFIG
 // =====================
@@ -23,12 +28,16 @@ mongoose.connect(`mongodb+srv://${loginDetails}@projectdeploycluster-zaz5i.mongo
 })
 
 // =====================
-// ROUTES
+// ROUTER CONFIG
 // =====================
 
 app.get('/', (req, res) => {
   res.send('server running')
 })
+
+app.use('/user', userRoutes)
+app.use('/:username', projectRoutes)
+app.use('/:username/:projectName/tasks', taskRoutes)
 
 // =====================
 // START SERVER
