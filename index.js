@@ -5,7 +5,8 @@
 // APP
 const express = require('express'),
   app = express(),
-  mongoose = require('mongoose')
+  mongoose = require('mongoose'),
+  dotenv = require('dotenv').config()
 
 // =====================
 // APP CONFIG
@@ -19,6 +20,14 @@ mongoose.connect(`mongodb+srv://${loginDetails}@projectdeploycluster-zaz5i.mongo
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
+})
+
+// =====================
+// ROUTES
+// =====================
+
+app.get('/', (req, res) => {
+  res.send('server running')
 })
 
 // =====================
