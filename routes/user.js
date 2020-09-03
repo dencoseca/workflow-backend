@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
 
 // SHOW
 router.get('/', (req, res) => {
-  User.find({ username: req.body.username }, (err, user) => {
+  User.findOne({ username: req.body.username }, (err, user) => {
     if (err) {
       console.log(err)
       err.message = 'Cannot find that user'
