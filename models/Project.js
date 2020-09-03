@@ -2,10 +2,11 @@ const mongoose = require('mongoose')
 
 const projectSchema = new mongoose.Schema(
   {
-    name: String,
+    name: { type: String, required: true },
     author: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      required: true
     },
     tasks: {
       type: mongoose.Schema.Types.ObjectId,
