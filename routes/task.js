@@ -4,11 +4,7 @@ const Task = require('../models/Task')
 // INDEX
 router.get('/findall', (req, res) => {
   Task.find({ projectId: req.body.projectId }, (err, tasks) => {
-    if (err) {
-      console.log(err)
-      err.message = 'Mongoose threw an error trying to find all the tasks'
-      res.send(err)
-    }
+    if (err) res.send({ message: 'Mongoose threw an error trying to find all the tasks' })
     res.send(tasks)
   })
 })
@@ -16,11 +12,7 @@ router.get('/findall', (req, res) => {
 // CREATE
 router.post('/create', (req, res) => {
   Task.create(req.body, (err, task) => {
-    if (err) {
-      console.log(err)
-      err.message = 'Mongoose threw an error trying to create a task'
-      res.send(err)
-    }
+    if (err) res.send({ message: 'Mongoose threw an error trying to create a task' })
     res.send(task)
   })
 })
@@ -28,19 +20,19 @@ router.post('/create', (req, res) => {
 // UPDATE
 router.post('/update', (req, res) => {
   Task.findByIdAndUpdate(req.body.id, req.body.task, (err, task) => {
-    if (err) {
-      console.log(err)
-      err.message = 'Mongoose threw an error trying to update a task'
-      res.send(err)
-    }
+    if (err) res.send({ message: 'Mongoose threw an error trying to update a task' })
     Task.findOne(task._id, (err, updatedTask) => {
-      if (err) {
-        console.log(err)
-        err.message = 'Mongoose threw an error trying to find a task'
-        res.send(err)
-      }
+      if (err) res.send({ message: 'Mongoose threw an error trying to find a task' })
       res.send(updatedTask)
     })
+  })
+})
+
+// DELETE
+router.delete('/delete', (req, res) => {
+  Task.findByIdAndDelete(req.body.id, err => {
+    if (err) res.send({ message: 'Mongoose threw an error trying to delete they tas' })
+    res.send({ message: 'Task successfully deleted' })
   })
 })
 
