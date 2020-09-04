@@ -8,6 +8,7 @@ const app = express()
 const mongoose = require('mongoose')
 const dotenv = require('dotenv').config()
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 // IMPORT ROUTES
 const userRoutes = require('./routes/user')
@@ -29,7 +30,8 @@ mongoose.connect(`mongodb+srv://${loginDetails}@projectdeploycluster-zaz5i.mongo
 })
 
 // MIDDLEWARE CONFIG
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
+app.use(bodyParser.json())
 
 // =====================
 // ROUTER CONFIG
