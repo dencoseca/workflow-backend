@@ -32,14 +32,12 @@ router.get('/findsingle', (req, res) => {
 
 // CREATE
 router.post('/create', async (req, res) => {
-  // Check that the project name is unique
   const projectExists = await Project.find({ author: req.body.author, name: req.body.name })
   if (projectExists.length > 0) {
     const newErr = new Error()
     newErr.message = 'Project with that name already exists'
     res.send(newErr)
   } else {
-    // Creat a new project and send it's data back
     Project.create(req.body, (err, project) => {
       if (err) {
         console.log(err)
@@ -52,14 +50,12 @@ router.post('/create', async (req, res) => {
 
 // UPDATE
 router.post('/update', (req, res) => {
-  // Find and update the project
   Project.findByIdAndUpdate(req.body.id, req.body.project, (err, project) => {
     if (err) {
       console.log(err)
       err.message = 'Failed to update project'
       res.send(err)
     }
-    // Return the updated project
     Project.findOne(project._id, (err, updatedProject) => {
       if (err) {
         console.log(err)

@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const taskSchema = new mongoose.Schema(
   {
     value: { type: String, required: true },
-    project: {
+    projectId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Project',
       required: true
