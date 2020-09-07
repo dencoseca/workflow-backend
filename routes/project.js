@@ -15,11 +15,12 @@ router.post('/findall', (req, res) => {
 
 // SHOW
 router.post('/findone', (req, res) => {
-  Project.findbyId(req.body.projectId)
+  Project.findOne({ _id: req.body.projectId })
     .populate('tasks')
     .exec((err, project) => {
       if (err) {
         res.send({ errorMessage: 'Mongoose threw an error while finding a single project' })
+        console.log(err)
       } else if (project == null) {
         res.send({ errorMessage: 'Cannot find project with that name' })
       } else {
