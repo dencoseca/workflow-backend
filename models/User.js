@@ -4,10 +4,12 @@ const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true },
     password: { type: String, required: true },
-    projects: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Project'
-    }
+    projects: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Project'
+      }
+    ]
   },
   { timestamps: true }
 )

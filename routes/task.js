@@ -1,5 +1,6 @@
 const router = require('express').Router({ mergeParams: true })
 const Task = require('../models/Task')
+const Project = require('../models/Project')
 
 // INDEX
 router.get('/findall', (req, res) => {
@@ -14,11 +15,19 @@ router.get('/findall', (req, res) => {
 
 // CREATE
 router.post('/create', (req, res) => {
-  Task.create(req.body, (err, task) => {
+  Project.findOne({ _id: req.body.projectId }, (err, project) => {
     if (err) {
-      res.send({ errorMessage: 'Mongoose threw an error trying to create a task' })
+      res.send({ errorMessage: "Hmmmm, that's strange, this project doesn't exist" })
     } else {
-      res.send(task)
+      Task.create(req.body, (err, task) => {
+        if (err) {
+          res.send({ errorMessage: 'Mongoose threw an error trying to create a task' })
+        } else {
+          project.tasks.push(task)
+          project.save()
+          res.send(task)
+        }
+      })
     }
   })
 })
