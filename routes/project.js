@@ -4,28 +4,28 @@ const Task = require('../models/Task')
 
 // INDEX
 router.post('/findall', (req, res) => {
-  Project.find({ userId: req.body.userId })
-    .populate('tasks')
-    .exec((err, projects) => {
-      if (err) {
-        res.send({ errorMessage: 'Mongoose threw an error while finding all projects' })
-      } else {
-        res.send(projects)
-      }
-    })
+  Project.find({ userId: req.body.userId }, (err, projects) => {
+    if (err) {
+      res.send({ errorMessage: 'Mongoose threw an error while finding all projects' })
+    } else {
+      res.send(projects)
+    }
+  })
 })
 
 // SHOW
-router.post('/findsingle', (req, res) => {
-  Project.findbyId(req.body.projectId, (err, project) => {
-    if (err) {
-      res.send({ errorMessage: 'Mongoose threw an error while finding a single project' })
-    } else if (project == null) {
-      res.send({ errorMessage: 'Cannot find project with that name' })
-    } else {
-      res.send(project)
-    }
-  })
+router.post('/findone', (req, res) => {
+  Project.findbyId(req.body.projectId)
+    .populate('tasks')
+    .exec((err, project) => {
+      if (err) {
+        res.send({ errorMessage: 'Mongoose threw an error while finding a single project' })
+      } else if (project == null) {
+        res.send({ errorMessage: 'Cannot find project with that name' })
+      } else {
+        res.send(project)
+      }
+    })
 })
 
 // CREATE
