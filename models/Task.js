@@ -8,8 +8,8 @@ const taskSchema = new mongoose.Schema(
       ref: 'Project',
       required: true
     },
-    categories: [String],
-    status: [String]
+    category: { type: String, required: true },
+    status: { type: String, required: true }
   },
   { timestamps: true }
 )

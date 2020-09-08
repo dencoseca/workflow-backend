@@ -22,7 +22,7 @@ router.post('/create', (req, res) => {
       Task.create({ ...req.body }, (err, task) => {
         if (err) {
           console.log(err)
-          res.send({ errorMessage: 'Mongoose threw an error trying to create a task' })
+          res.send({ errorMessage: 'Cannot have empty fields' })
         } else {
           project.tasks.push(task)
           project.save()
