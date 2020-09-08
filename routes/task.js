@@ -19,8 +19,9 @@ router.post('/create', (req, res) => {
     if (err) {
       res.send({ errorMessage: "Hmmmm, that's strange, this project doesn't exist" })
     } else {
-      Task.create(req.body, (err, task) => {
+      Task.create({ ...req.body }, (err, task) => {
         if (err) {
+          console.log(err)
           res.send({ errorMessage: 'Mongoose threw an error trying to create a task' })
         } else {
           project.tasks.push(task)
