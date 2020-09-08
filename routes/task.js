@@ -43,7 +43,7 @@ router.post('/update', (req, res) => {
         if (err) {
           res.send({ errorMessage: 'Mongoose threw an error trying to find a task' })
         } else {
-          res.send(updatedTask)
+          res.send({ successMessage: 'Task successfully updated', updatedTask })
         }
       })
     }
