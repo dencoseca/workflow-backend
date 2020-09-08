@@ -34,7 +34,7 @@ router.post('/create', (req, res) => {
 
 // UPDATE
 router.post('/update', (req, res) => {
-  Task.findByIdAndUpdate(req.body.id, req.body.task, (err, task) => {
+  Task.findByIdAndUpdate(req.body.taskId, req.body.task, (err, task) => {
     if (err) {
       res.send({ errorMessage: 'Mongoose threw an error trying to update a task' })
     } else {
@@ -50,12 +50,12 @@ router.post('/update', (req, res) => {
 })
 
 // DELETE
-router.delete('/delete', (req, res) => {
-  Task.findByIdAndDelete(req.body.id, err => {
+router.post('/delete', (req, res) => {
+  Task.findByIdAndDelete(req.body.taskId, (err, deletedTask) => {
     if (err) {
       res.send({ errorMessage: 'Mongoose threw an error trying to delete they tas' })
     } else {
-      res.send({ errorMessage: 'Task successfully deleted' })
+      res.send({ successMessage: 'Task successfully deleted', deletedTask })
     }
   })
 })
