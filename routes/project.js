@@ -64,7 +64,7 @@ router.post('/update', (req, res) => {
         if (err) {
           res.send({ errorMessage: 'Mongoose threw an error trying to find updated project' })
         } else {
-          res.send(updatedProject)
+          res.send({ successMessage: 'Project successfully updated', updatedProject })
         }
       })
     }
