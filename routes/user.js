@@ -8,8 +8,11 @@ router.post('/signup', async (req, res) => {
     res.send({ errorMessage: 'User with that name already exists' })
   } else {
     User.create(req.body, (err, user) => {
-      if (err) res.send({ errorMessage: 'Mongoose threw an error trying to create a new user' })
-      res.send(user)
+      if (err) {
+        res.send({ errorMessage: 'Mongoose threw an error trying to create a new user' })
+      } else {
+        res.send({ successMessage: `Hi ${user.username}, you're all signed up!`, user })
+      }
     })
   }
 })
