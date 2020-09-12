@@ -6,7 +6,7 @@ const Project = require('../models/Project')
 router.get('/findall', (req, res) => {
   Task.find({ projectId: req.body.projectId }, (err, tasks) => {
     if (err) {
-      res.send({ errorMessage: 'Mongoose threw an error trying to find all the tasks' })
+      res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
     } else {
       res.send(tasks)
     }
@@ -17,7 +17,7 @@ router.get('/findall', (req, res) => {
 router.post('/create', (req, res) => {
   Project.findOne({ _id: req.body.projectId }, (err, project) => {
     if (err) {
-      res.send({ errorMessage: "Hmmmm, that's strange, this project doesn't exist" })
+      res.send({ errorMessage: "Hmmmm, that's strange, this project doesn't exist anymore" })
     } else {
       Task.create({ ...req.body }, (err, task) => {
         if (err) {
@@ -37,11 +37,11 @@ router.post('/create', (req, res) => {
 router.post('/update', (req, res) => {
   Task.findByIdAndUpdate(req.body.taskId, req.body.task, (err, task) => {
     if (err) {
-      res.send({ errorMessage: 'Mongoose threw an error trying to update a task' })
+      res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
     } else {
       Task.findOne(task._id, (err, updatedTask) => {
         if (err) {
-          res.send({ errorMessage: 'Mongoose threw an error trying to find a task' })
+          res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
         } else {
           res.send({ successMessage: 'Task successfully updated', updatedTask })
         }
@@ -54,7 +54,7 @@ router.post('/update', (req, res) => {
 router.post('/delete', (req, res) => {
   Task.findByIdAndDelete(req.body.taskId, (err, deletedTask) => {
     if (err) {
-      res.send({ errorMessage: 'Mongoose threw an error trying to delete they tas' })
+      res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
     } else {
       res.send({ successMessage: 'Task successfully deleted', deletedTask })
     }

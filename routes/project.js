@@ -7,7 +7,7 @@ const User = require('../models/User')
 router.post('/findall', (req, res) => {
   Project.find({ userId: req.body.userId }, (err, projects) => {
     if (err) {
-      res.send({ errorMessage: 'Mongoose threw an error while finding all projects' })
+      res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
     } else {
       res.send(projects)
     }
@@ -20,7 +20,7 @@ router.post('/findone', (req, res) => {
     .populate('tasks')
     .exec((err, project) => {
       if (err) {
-        res.send({ errorMessage: 'Mongoose threw an error while finding a single project' })
+        res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
         console.log(err)
       } else if (project == null) {
         res.send({ errorMessage: 'Cannot find project with that name' })
@@ -42,7 +42,7 @@ router.post('/create', async (req, res) => {
       } else {
         Project.create(req.body, (err, project) => {
           if (err) {
-            res.send({ errorMessage: 'Mongoose threw an error trying to create the project' })
+            res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
           } else {
             user.projects.push(project)
             user.save()
@@ -58,11 +58,11 @@ router.post('/create', async (req, res) => {
 router.post('/update', (req, res) => {
   Project.findByIdAndUpdate(req.body.projectId, req.body.project, (err, project) => {
     if (err) {
-      res.send({ errorMessage: 'Mongoose threw an error trying to update the project' })
+      res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
     } else {
       Project.findOne(project._id, (err, updatedProject) => {
         if (err) {
-          res.send({ errorMessage: 'Mongoose threw an error trying to find updated project' })
+          res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
         } else {
           res.send({ successMessage: 'Project successfully updated', updatedProject })
         }
@@ -75,7 +75,7 @@ router.post('/update', (req, res) => {
 router.post('/delete', (req, res) => {
   Project.findByIdAndDelete(req.body.projectId, (err, deletedProject) => {
     if (err) {
-      res.send({ errorMessage: 'Mongoose threw an error trying to delete project' })
+      res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
     } else if (!deletedProject) {
       res.send({ errorMessage: 'Project deletion unsuccessful' })
     } else {

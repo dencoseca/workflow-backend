@@ -9,7 +9,7 @@ router.post('/signup', async (req, res) => {
   } else {
     User.create(req.body, (err, user) => {
       if (err) {
-        res.send({ errorMessage: 'Mongoose threw an error trying to create a new user' })
+        res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
       } else {
         res.send({ successMessage: `Hi ${user.username}, you're all signed up!`, user })
       }
@@ -21,7 +21,7 @@ router.post('/signup', async (req, res) => {
 router.post('/login', (req, res) => {
   User.findOne({ username: req.body.username, password: req.body.password }, (err, user) => {
     if (err) {
-      res.send({ errorMessage: 'Mongoose threw an error trying to find a user' })
+      res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
     } else if (user == null) {
       res.send({ errorMessage: 'Username or password are incorrect' })
     } else {
