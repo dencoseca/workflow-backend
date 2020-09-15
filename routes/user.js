@@ -23,7 +23,10 @@ router.post('/login', (req, res) => {
     if (err) {
       res.send({ errorMessage: 'A naughty Mongoose got in the way! Please wait a few seconds and try again...' })
     } else if (user == null) {
-      res.send({ errorMessage: 'Username or password are incorrect' })
+      res.send({
+        errorMessage:
+          "Either Username or password are incorrect... or you're not real? Describe in single words only the good things that come to mind about your mother"
+      })
     } else {
       res.send(user)
     }
