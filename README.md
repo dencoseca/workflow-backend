@@ -12,12 +12,6 @@ A task manager for users to manage their projects.
 - Axios
 - use-immer
 
-#### Live link
-
-[Workflow](https://workflow.vercel.app/)
-
-[Workflows backend API](https://github.com/dencoSeca/workflow-backend) on GitHub
-
 ## Status
 
 Incomplete. I’ve yet to make this project responsive on mobile and tablet views.
